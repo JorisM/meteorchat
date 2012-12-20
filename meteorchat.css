@@ -1,0 +1,40 @@
+/* CSS declarations go here */
+.messages-container
+{
+	margin-top: 30px;
+	height: 500px;
+	overflow: scroll;
+}
+
+h3
+{
+	text-align: center;
+	padding-top: 40px;
+}
+
+.input-container
+{
+	margin: auto;
+	width: 235px;
+
+}
+
+.register-container
+{
+	width: 300px;
+	margin: auto;
+	margin-top: 130px;
+}
+
+#login-buttons
+{
+	float: right;
+	margin-right: 80px;
+	margin-top: 20px;
+}
+
+.message
+{
+	padding: 8px 5px 8px 30px;
+
+}

@@ -1,0 +1,34 @@
+<head>
+	<title>meteorchat</title>
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	{{loginButtons align="right"}}
+
+	<div class="container">
+		<h3>messages</h3>
+		{{#if currentUser}}
+			<div class="messages-container">
+				{{> messages}}
+			</div>
+			<div class="input-container">
+				{{> input}}
+			</div>
+		{{/if}}
+	</div>
+</body>
+
+<template name="input">
+	<input type="text" id="message" placeholder="say something..." />
+	<input type="button" class="btn success send" value="send">
+</template>
+
+<template name="messages">
+	<h1>{{greeting}}</h1>
+	{{#each messages}}
+		<p style="background-color: {{color}}" class="message">
+			<strong>{{name}}</strong> - {{message}}
+		</p>
+	{{/each}}
+</template>
