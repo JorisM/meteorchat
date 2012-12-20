@@ -8,7 +8,6 @@ if Meteor.isClient
 			@scrollToBottom()
 			#set chatrom number if no chatroom is selected
 			if not Session.get "chatroom_id"
-				Session.set "chatroom_id", chatroom_id
 				Session.set "chatroom_id", 0
 
 		Template.messages.messages = ->
@@ -30,8 +29,9 @@ if Meteor.isClient
 		#scroll to bottom of message container
 		scrollToBottom: ->
 			console.log "scrolling"
-			height = $(".messages-container")[0].scrollHeight + 40
-			$(".messages-container").scrollTop height
+			if $(".messages-container")[0]
+				height = $(".messages-container")[0].scrollHeight + 40
+				$(".messages-container").scrollTop height
 
 
 	class ChatRouter extends Backbone.Router
