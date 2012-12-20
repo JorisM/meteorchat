@@ -24,12 +24,15 @@ if Meteor.isClient
 
 		events:
 			'click .send': 'send'
+			'keyup :input' : 'evalKeypress'
 
 		send: ->
 			#insert a new chatmessage
 			ChatMessages.insert({ name: Meteor.user().username, message: $(document).find('#message').val(), time: Date.now(), color: Meteor.users.findOne({_id: Meteor.userId()}).profile.color, chatroom_id: Session.get "chatroom_id"})
 
-
+		evalKeypress: (e) ->
+			if e.keyCode == 13
+				@send()
 
 
 		#scroll to bottom of message container
