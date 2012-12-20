@@ -29,6 +29,7 @@ if Meteor.isClient
 		send: ->
 			#insert a new chatmessage
 			ChatMessages.insert({ name: Meteor.user().username, message: $(document).find('#message').val(), time: Date.now(), color: Meteor.users.findOne({_id: Meteor.userId()}).profile.color, chatroom_id: Session.get "chatroom_id"})
+			@$el.find('#message').val('').focus()
 
 		evalKeypress: (e) ->
 			if e.keyCode == 13
@@ -38,8 +39,7 @@ if Meteor.isClient
 		#scroll to bottom of message container
 		scrollToBottom: ->
 			if $(".messages-container")[0]
-				height = $(".messages-container")[0].scrollHeight + 40
-				$(".messages-container").scrollTop height
+				$(".messages-container").scrollTop($(".messages-container")[0].scrollHeight);
 
 
 	class ChatRouter extends Backbone.Router
