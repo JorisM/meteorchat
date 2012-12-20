@@ -9,6 +9,7 @@ if Meteor.isClient
 			#set chatrom number if no chatroom is selected
 			if not Session.get "chatroom_id"
 				Session.set "chatroom_id", chatroom_id
+				Session.set "chatroom_id", 0
 
 		Template.messages.messages = ->
 			#find all chatmessages belonging to selected chatroom and sort descending
