@@ -1,8 +1,6 @@
 /* CSS declarations go here */
 .messages-container
 {
-	height: auto;
-	overflow: scroll;
 }
 
 h3
@@ -12,10 +10,14 @@ h3
 }
 
 
-
 .input-container input
 {
 	width: 100%;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	padding: 15px 15px 15px 15px;
+	height: auto;
 }
 
 
@@ -30,4 +32,32 @@ h3
 {
 	padding: 8px 5px 8px 30px;
 
+}
+
+
+/* Large desktop */
+@media (min-width: 1200px)
+{
+	.messages-container
+	{
+		max-height: 500px;
+		overflow: scroll;
+
+	}
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px)
+{
+	.messages-container
+	{
+		height: auto;
+		width: 100%;
+	}
+
+	.container
+	{
+		width: auto !important;
+	}
 }
