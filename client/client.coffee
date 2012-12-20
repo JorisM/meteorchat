@@ -10,6 +10,12 @@ if Meteor.isClient
 			if not Session.get "chatroom_id"
 				Session.set "chatroom_id", 0
 
+			#subscribe to others so your view scrolls when others enter messages. todo: only autosubscribe to new, not existing entries.
+			Meteor.autosubscribe =>
+				ChatMessages.find(chatroom_id: Session.get "chatroom_id").observe added: (item) =>
+					@scrollToBottom()
+
+
 		Template.messages.messages = ->
 			#find all chatmessages belonging to selected chatroom and sort descending
 			ChatMessages.find {chatroom_id: Session.get "chatroom_id"},
@@ -21,14 +27,13 @@ if Meteor.isClient
 
 		send: ->
 			#insert a new chatmessage
-			ChatMessages.insert({ name: Meteor.user().username, message: $(document).find('#message').val(), time: Date.now(), color: Meteor.users.findOne({_id: Meteor.userId()}).profile.color, chatroom_id: Session.get "chatroom_id"},
-					=>
-						@scrollToBottom()
-				)
+			ChatMessages.insert({ name: Meteor.user().username, message: $(document).find('#message').val(), time: Date.now(), color: Meteor.users.findOne({_id: Meteor.userId()}).profile.color, chatroom_id: Session.get "chatroom_id"})
+
+
+
 
 		#scroll to bottom of message container
 		scrollToBottom: ->
-			console.log "scrolling"
 			if $(".messages-container")[0]
 				height = $(".messages-container")[0].scrollHeight + 40
 				$(".messages-container").scrollTop height
@@ -40,11 +45,6 @@ if Meteor.isClient
 
 		chatroom: (chatroom_id) ->
 			Session.set "chatroom_id", chatroom_id
-
-			setDocument: (chatroom_id) ->
-				@navigate(chatroom_id, true)
-
-
 
 
 	Meteor.startup ->
